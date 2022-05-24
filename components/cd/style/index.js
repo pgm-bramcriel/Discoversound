@@ -5,7 +5,7 @@ const CdStyle = styled.div`
     @keyframes rotate {
         100% {transform: translateX(50%) rotate(360deg);}
     }
-    
+
     width: 25rem;
     height: 25rem;
     bottom: -12.5rem;
@@ -29,8 +29,8 @@ const CdStyle = styled.div`
 const CdMiddle = styled.div`
     position: absolute;
     z-index: 1;
-    width: 3rem;
-    height: 3rem;
+    width: 4rem;
+    height: 4rem;
     background-color: ${color.black};
     border-radius: 100%;
     left: 50%;
