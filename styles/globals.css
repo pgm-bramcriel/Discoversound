@@ -25,6 +25,8 @@ ul {
   margin: 0;
 }
 
-p {
+p,
+h1,
+h2 {
   margin: 0;
 }

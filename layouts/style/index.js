@@ -6,7 +6,6 @@ const GlobalStyling = styled.div`
 `
 
 const MainStyling = styled.main`
-    padding-top: 4rem;
     max-width: 90rem;
     margin: 0 auto;
     padding: 2rem 1rem;
