@@ -2,12 +2,12 @@ import styled from 'styled-components';
 import { color, fontSize, transition } from '../../../styles/variables';
 
 const LogoStyle = styled.span`
-    font-size: ${fontSize.m};
-    text-transform: uppercase;
+    font-size: 1.25rem;
     font-weight: bold;
     cursor: pointer;
-    margin-right: 2rem;
+    margin-right: 4rem;
     transition: ${transition.medium};
+    position: relative;
 
     &:hover {
         transform: scale(1.15);
@@ -18,6 +18,16 @@ const LogoStyle = styled.span`
     }
 `
 
+const LogoSound = styled.p`
+    position: absolute;
+    color: ${color.accent};
+    font-weight: normal;
+    font-style: italic;
+    right: -0.75rem;
+    bottom: -0.65rem;
+`
+
 export {
-    LogoStyle
+    LogoStyle,
+    LogoSound,
 }
