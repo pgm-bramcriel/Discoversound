@@ -1,5 +1,6 @@
 import React from 'react'
 import Nav from '../components/nav/Nav'
+import WelcomeModal from '../components/welcomeModal/WelcomeModal'
 import { GlobalStyling, MainStyling } from './style'
 
 const BaseLayout = ({children}) => {
@@ -9,6 +10,7 @@ const BaseLayout = ({children}) => {
         <MainStyling>
             {children}
         </MainStyling>
+        <WelcomeModal />
     </GlobalStyling>
   )
 }

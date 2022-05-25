@@ -1,9 +1,9 @@
 import React from 'react'
 import { ButtonStyle } from './style'
 
-const MainButton = ({children}) => {
+const MainButton = ({children, onClick}) => {
   return (
-    <ButtonStyle>
+    <ButtonStyle onClick={onClick}>
       {children}
     </ButtonStyle>
   )

@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, {useState, useContext} from 'react'
 import Link from 'next/link'
 import Cd from '../components/cd/Cd';
 import BaseLayout from '../layouts/BaseLayout';
@@ -7,6 +7,7 @@ import Player from '../components/player/Player';
 import ArtistCover from '../components/artistCover/ArtistCover';
 import { Heading, HomeInfo } from './styles/home';
 import MainButton from '../components/mainButton/MainButton';
+import { PlayedContext } from '../context/PlayedContext';
 const ReactPlayer = dynamic(() => import("react-player"), { ssr: false });
 
 const Home = () => {
@@ -15,6 +16,7 @@ const Home = () => {
   const [trackProgress, setTrackProgress] = useState(0);
   const [playing, setPlaying] = useState(false);
   const [controls, setControls] = useState(false);
+  const {value} = useContext(PlayedContext);
 
   const cover1 = require("../public/images/rose-mixtape-album-cover-art-template-design-59c928b377e5f0e8e9aabc4982ca7e14_screen.jpg");
   const cover2 = require("../public/images/fairy-tale-cd-cover-art-template-design-7d7816925d2958dd4a4e968954ceadf5_screen.jpg");
@@ -86,10 +88,10 @@ const Home = () => {
         </HomeInfo>
         <ReactPlayer
           controls={controls}
-          playing={playing}
+          playing={value}
           onProgress={handleProgress}
           onDuration={handleDuration}
-          volume={0}
+          volume={0.1}
           url={tracks[trackIndex].src} />
       </BaseLayout>
       <Player value={trackProgress} max={trackDuration}/>
