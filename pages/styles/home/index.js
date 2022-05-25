@@ -1,9 +1,13 @@
 import styled from 'styled-components';
-import { color, fontSize, transition } from '../../../styles/variables';
+import { color, fontSize, media, transition } from '../../../styles/variables';
 
 const Heading = styled.div`
   position: relative;
-  margin-top: 4rem;
+  margin-top: 0rem;
+
+  @media (min-width: ${media.large}) {
+    margin-top: 4rem;
+  }
 
   p {
     color: ${color.accent};
@@ -29,11 +33,16 @@ const Heading = styled.div`
 
 const HomeInfo = styled.div`
   position: absolute;
-  top: 23.5rem;
-  left: 37rem;
+  top: 20rem;
+  padding-right: 1rem;
+
+  @media (min-width: ${media.large}) {    
+    top: 23.5rem;
+    left: 37rem;
+  }
 
   h2 {
-    font-size: ${fontSize.l};
+    font-size: ${fontSize.m};
     margin-bottom: 1rem;
     max-width: 30rem;
     text-overflow: ellipsis;
@@ -41,8 +50,17 @@ const HomeInfo = styled.div`
     display: flex;
     align-items: center;
 
+    @media (min-width: ${media.large}) {
+      font-size: ${fontSize.l};
+    }
+
     svg {
       margin-right: 1rem;
+      width: 1rem;
+
+      @media (min-width: ${media.large}) {
+        width: inherit;
+      }
     }
 
     button {

@@ -1,13 +1,19 @@
 import styled from 'styled-components';
+import { media } from '../../../styles/variables';
 
 const ArtistCoverStyled = styled.div`
   position: absolute;
   left: 0;
   bottom: 0;
-  width: 35rem;
-  height: 35rem;
+  width: 100%;
+  height: 20rem;
   max-width: 100%;
   max-height: 100%;
+
+  @media (min-width: ${media.large}) {
+    height: 35rem;
+    width: 35rem;
+  }
 `
 
 const ImageFilter = styled.div`
