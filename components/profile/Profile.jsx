@@ -10,7 +10,7 @@ const Profile = () => {
     <ProfileStyle>
       {user ? (
         <div>
-          <p>{user.email}</p>
+          <p>{user.displayName ? user.displayName : user.email}</p>
           <p onClick={() => {logout()}}>Logout</p>
         </div>
       ) : (
