@@ -91,7 +91,7 @@ const Home = () => {
           playing={value}
           onProgress={handleProgress}
           onDuration={handleDuration}
-          volume={0.1}
+          volume={0}
           url={tracks[trackIndex].src} />
       </BaseLayout>
       <Player value={trackProgress} max={trackDuration}/>

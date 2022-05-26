@@ -1,10 +1,14 @@
-import React from 'react'
+import React, {useContext} from 'react'
 import { ProfileStyle } from './style'
-
+import {ModalContext} from '../../context/ModalContext'
 const Profile = () => {
+  const {setModalValue} = useContext(ModalContext);
+
   return (
     <ProfileStyle>
-        <p>Account name</p>
+        <button onClick={() => setModalValue(true)}>
+          <p>Sign in</p>
+        </button>
     </ProfileStyle>
   )
 }
