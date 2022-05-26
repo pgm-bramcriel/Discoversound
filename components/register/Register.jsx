@@ -1,4 +1,7 @@
+import { updateProfile } from 'firebase/auth';
 import React, {useState} from 'react'
+import { auth } from '../../config/firebase';
+import { useAuth } from '../../context/AuthContext';
 import MainButton from '../mainButton/MainButton'
 import { RegisterStyled } from './style'
 
@@ -6,14 +9,18 @@ const Register = () => {
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const {register} = useAuth();
 
-
-  const handleRegister = (e) => {
+  const handleRegister = async (e) => {
     e.preventDefault();
-
-    console.log(username);
-    console.log(email);
-    console.log(password);
+    try {
+      await register(email, password);
+      updateProfile(auth.currentUser, {
+        displayName: username
+      });
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   return (
