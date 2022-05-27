@@ -32,8 +32,6 @@ const Heading = styled.div`
 `
 
 const HomeInfo = styled.div`
-  position: absolute;
-  top: 20rem;
   padding-right: 1rem;
 
   @media (min-width: ${media.large}) {    
@@ -98,7 +96,22 @@ const HomeInfo = styled.div`
   }
 `
 
+const ArtistInfo = styled.div`
+  position: absolute;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  width: 100%;
+  left:0;
+  bottom:0;
+
+  @media (min-width: ${media.large}) {
+    flex-direction: row;
+  }
+`
+
 export {
   Heading,
-  HomeInfo
+  HomeInfo,
+  ArtistInfo
 }
