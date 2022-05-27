@@ -1,10 +1,17 @@
-import React from 'react'
+import React, {useContext} from 'react'
 import Image from 'next/image'
 import { CardContainer, CardLeft, CardRight, CardSongInfo } from './style'
+import { SongContext } from '../../context/SongContext';
 
-const MusicCard = ({image, index, songName, artistName}) => {
+const MusicCard = ({image, index, songName, artistName, source, duration}) => {
+  const {setSong} = useContext(SongContext);
+
+  const handleClick = () => {
+    setSong(source);
+  }
+
   return (
-    <CardContainer>
+    <CardContainer onClick={handleClick}>
       <CardLeft>
         <span>#{index}</span>
         <figure>

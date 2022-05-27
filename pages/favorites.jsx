@@ -1,11 +1,25 @@
-import React from 'react'
+import React, {useState} from 'react'
+import ReactPlayer from 'react-player';
 import BaseTitle from '../components/baseTitle/BaseTitle'
 import MusicCard from '../components/musicCard/MusicCard';
-import BaseLayout from '../layouts/BaseLayout'
+import BaseLayout from '../layouts/BaseLayout';
+import { SongContext } from '../context/SongContext';
+import Player from '../components/player/Player';
 
 const Favorites = () => {
+  const [song, setSong] = useState('');
+  const [trackDuration, setTrackDuration] = useState(0);
+  const [trackProgress, setTrackProgress] = useState(0);
   const cover1 = require("../public/images/rose-mixtape-album-cover-art-template-design-59c928b377e5f0e8e9aabc4982ca7e14_screen.jpg");
   const cover2 = require("../public/images/fairy-tale-cd-cover-art-template-design-7d7816925d2958dd4a4e968954ceadf5_screen.jpg");
+
+  const handleProgress = (progress) => {
+    setTrackProgress(progress.playedSeconds);
+  }
+
+  const handleDuration = (duration) => {
+    setTrackDuration(duration);
+  }
 
   const tracks = [
     {
@@ -23,18 +37,29 @@ const Favorites = () => {
   ]
 
   return (
-    <BaseLayout>
-      <BaseTitle subtitle={'your'} title={'favorites'}/>
-      <div style={{
-        marginTop : '4rem'
-      }}>
-        {tracks.map((track, index) => {
-          return (
-            <MusicCard key={index} index={index + 1} songName={track.title} artistName={track.artist} image={track.artistCover}/>
-          )
-        })}
-      </div>
-    </BaseLayout>
+    <SongContext.Provider value={{song, setSong}}>
+      <BaseLayout>
+        <BaseTitle subtitle={'your'} title={'favorites'}/>
+        <div style={{
+          marginTop : '4rem'
+        }}>
+          {tracks.map((track, index) => {
+            return (
+              <MusicCard key={index} duration={trackDuration} source={track.src} index={index + 1} songName={track.title} artistName={track.artist} image={track.artistCover}/>
+            )
+          })}
+        </div>
+        <ReactPlayer
+            onProgress={handleProgress}
+            onDuration={handleDuration}
+            playing
+            volume={0.1}
+            url={song}
+            height={0}
+            width={0}/>
+      </BaseLayout>
+      <Player value={trackProgress} max={trackDuration}/>
+    </SongContext.Provider>
   )
 }
 
