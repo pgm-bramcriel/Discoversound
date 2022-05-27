@@ -5,10 +5,6 @@ const Heading = styled.div`
   position: relative;
   margin-top: 0rem;
 
-  @media (min-width: ${media.large}) {
-    margin-top: 4rem;
-  }
-
   p {
     color: ${color.accent};
     font-style: italic;
