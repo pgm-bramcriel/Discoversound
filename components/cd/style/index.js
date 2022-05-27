@@ -5,6 +5,11 @@ const CdStyle = styled.div`
     @keyframes rotate {
         100% {transform: translateX(50%) rotate(360deg);}
     }
+    display: none;
+
+    @media (min-width: ${media.large}) {
+        display: block;
+    }
 
     width: 25rem;
     height: 25rem;
