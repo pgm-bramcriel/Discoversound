@@ -9,8 +9,8 @@ const ArtistCoverStyled = styled.div`
   margin-right: 2rem;
 
   @media (min-width: ${media.large}) {
-    height: 35rem;
-    width: 35rem;
+    height: 60vh;
+    width: 35vw;
   }
 
   span {
@@ -18,7 +18,7 @@ const ArtistCoverStyled = styled.div`
     max-width: 100%;
 
     @media (min-width: ${media.large}) {
-      width: 35rem !important;
+      width: 35vw !important;
     }
   }
 `
@@ -31,7 +31,7 @@ const ImageFilter = styled.div`
   background: linear-gradient(0deg, rgba(28,28,28,1) 0%, rgba(0,0,0,0) 90%);
 
   @media (min-width: ${media.large}) {
-    width: 35rem;;
+    width: 35vw;
   }
 `
 
