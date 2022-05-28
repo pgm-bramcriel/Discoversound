@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { color, fontSize, radius } from '../../../styles/variables';
+import { color, radius } from '../../../styles/variables';
 
 const LoginStyle = styled.div`
   h2 {

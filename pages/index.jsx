@@ -14,13 +14,27 @@ const Home = () => {
   const [trackIndex, setTrackIndex] = useState(0);
   const [trackDuration, setTrackDuration] = useState(0);
   const [trackProgress, setTrackProgress] = useState(0);
-  const [playing, setPlaying] = useState(false);
+  const [setPlaying] = useState(false);
   const [controls, setControls] = useState(false);
   const {value} = useContext(PlayedContext);
 
   const cover1 = require("../public/images/rose-mixtape-album-cover-art-template-design-59c928b377e5f0e8e9aabc4982ca7e14_screen.jpg");
   const cover2 = require("../public/images/fairy-tale-cd-cover-art-template-design-7d7816925d2958dd4a4e968954ceadf5_screen.jpg");
-
+  
+  const tracks = [
+    {
+      artist: 'Rose Mixtape',
+      title: 'Late Night Drive',
+      src: 'https://audioplayer.madza.dev/Madza-Late_Night_Drive.mp3',
+      artistCover: cover1
+    },
+    {
+      artist: 'Fairy Tale',
+      title: 'Chords of Life',
+      src: 'https://audioplayer.madza.dev/Madza-Chords_of_Life.mp3',
+      artistCover: cover2
+    }
+  ];
   const handleProgress = (progress) => {
     setTrackProgress(progress.playedSeconds);
 
@@ -37,25 +51,17 @@ const Home = () => {
     setTrackDuration(duration);
   }
 
-  const tracks = [
-    {
-      artist: 'Rose Mixtape',
-      title: 'Late Night Drive',
-      src: 'https://audioplayer.madza.dev/Madza-Late_Night_Drive.mp3',
-      artistCover: cover1
-    },
-    {
-      artist: 'Fairy Tale',
-      title: 'Chords of Life',
-      src: 'https://audioplayer.madza.dev/Madza-Chords_of_Life.mp3',
-      artistCover: cover2
-    }
-  ]
+  // const handleShuffle = (e) => {
+  //   e.preventDefault();
+  //   setTrackIndex(Math.floor(Math.random() * tracks.length));
+  //   console.log(Math.floor(Math.random() * tracks.length));
+  // }
 
   return (
     <>
       <BaseLayout>
         <Cd />
+        {/* <button onClick={handleShuffle}>Shuffle</button> */}
         <div style={{
           display: 'none'
         }}>
