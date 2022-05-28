@@ -75,7 +75,7 @@ const Favorites = () => {
       }
       {user === null &&
         <BaseLayout>
-          <h2>Sign in to add favorites!</h2>
+          <h3>Sign in to add favorites!</h3>
         </BaseLayout>
       }
     </>
