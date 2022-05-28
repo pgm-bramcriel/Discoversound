@@ -6,6 +6,7 @@ import BaseLayout from '../layouts/BaseLayout';
 import { SongContext } from '../context/SongContext';
 import Player from '../components/player/Player';
 import { useAuth } from '../context/AuthContext';
+import FavoriteArtistCover from '../components/favoriteArtistCover/FavoriteArtistCover';
 
 const Favorites = () => {
   const {user} = useAuth();
@@ -38,7 +39,9 @@ const Favorites = () => {
     }
   ]
 
-  console.log(user);
+  const currentArtist = tracks.filter((track) => {
+    return track.src === song;
+  });
 
   return (
     <>
@@ -59,12 +62,15 @@ const Favorites = () => {
                 onProgress={handleProgress}
                 onDuration={handleDuration}
                 playing
-                volume={0.1}
+                volume={0}
                 url={song}
                 height={0}
                 width={0}/>
           </BaseLayout>
           <Player value={trackProgress} max={trackDuration}/>
+          {currentArtist.length > 0 &&
+            <FavoriteArtistCover image={currentArtist[0].artistCover} />
+          }
         </SongContext.Provider>
       }
       {user === null &&
