@@ -2,10 +2,12 @@ import React, {useState, useContext} from 'react'
 import { WelcomeModalStyle } from './style'
 import MainButton from '../mainButton/MainButton'
 import { PlayedContext } from '../../context/PlayedContext';
+import { useAuth } from '../../context/AuthContext';
 
 const WelcomeModal = () => {
   const [clicked, setClicked] = useState(false);
   const {setValue} = useContext(PlayedContext);
+  const {user} = useAuth();
 
   const handleClick = () => {
     setClicked(true);
@@ -16,7 +18,12 @@ const WelcomeModal = () => {
     <WelcomeModalStyle style={{
       display: clicked ? 'none' : 'block',
     }}>
-      <h2>Welcome back!</h2>
+      {user &&
+        <h2 className='title-logged'>Welcome back, <span>{user.displayName}</span></h2>
+      }
+      {user === null &&
+        <h2>Welcome back!</h2>
+      }
       <MainButton onClick={handleClick}>Start Listening!</MainButton>
       <svg xmlns="http://www.w3.org/2000/svg" width="336.207" height="383.561" viewBox="0 0 336.207 383.561">
         <g id="undraw_welcoming_re_x0qo" transform="translate(0 0)">
