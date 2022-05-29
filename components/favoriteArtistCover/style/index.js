@@ -9,7 +9,7 @@ const FavoriteArtistCoverStyle = styled.div`
   position: absolute;
   bottom: 0;
   left: 0;
-
+  
   span {
     width: 30rem;
     max-width: 100%;

@@ -26,13 +26,15 @@ const Home = () => {
       artist: 'Rose Mixtape',
       title: 'Late Night Drive',
       src: 'https://audioplayer.madza.dev/Madza-Late_Night_Drive.mp3',
-      artistCover: cover1
+      artistCover: cover1,
+      id: '1'
     },
     {
       artist: 'Fairy Tale',
       title: 'Chords of Life',
       src: 'https://audioplayer.madza.dev/Madza-Chords_of_Life.mp3',
-      artistCover: cover2
+      artistCover: cover2,
+      id: '2'
     }
   ];
   const handleProgress = (progress) => {
@@ -72,7 +74,7 @@ const Home = () => {
         </div>
         <Heading>
           <p>Discover</p>
-          <Link href="/">
+          <Link href={`artist/${tracks[trackIndex].id}`}>
             <h1>{tracks[trackIndex].artist}</h1>
           </Link>
         </Heading>

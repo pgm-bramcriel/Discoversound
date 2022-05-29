@@ -3,7 +3,7 @@ import { media } from '../../../styles/variables';
 
 const ArtistCoverStyled = styled.div`
   width: 100%;
-  height: 20rem;
+  height: 20vh;
   max-width: 100%;
   max-height: 100%;
   margin-right: 2rem;

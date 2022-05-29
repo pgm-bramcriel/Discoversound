@@ -24,8 +24,8 @@ const CdStyle = styled.div`
     overflow: hidden;
 
     @media (min-width: ${media.medium}) {
-        width: 35rem;
-        height: 35rem;
+        width: 50vh;
+        height: 50vh;
         right: 0;
         top: 22%;
     }

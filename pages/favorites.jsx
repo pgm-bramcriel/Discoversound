@@ -68,9 +68,9 @@ const Favorites = () => {
                 width={0}/>
           </BaseLayout>
           <Player value={trackProgress} max={trackDuration}/>
-          {currentArtist.length > 0 &&
+          {/* {currentArtist.length > 0 &&
             <FavoriteArtistCover image={currentArtist[0].artistCover} />
-          }
+          } */}
         </SongContext.Provider>
       }
       {user === null &&
