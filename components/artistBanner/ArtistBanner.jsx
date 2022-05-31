@@ -12,12 +12,12 @@ const ArtistBanner = () => {
         </h2>
       </section>
       <FilterImage />
-      <Image
+      {/* <Image
         src={image}
         alt='cover image'
         objectFit='cover'
-        layout='fill'
-      />
+        height={600}
+      /> */}
     </ArtistBannerStyle>
   )
 }

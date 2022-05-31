@@ -2,9 +2,6 @@ import styled from 'styled-components';
 import { color } from '../../../styles/variables';
 
 const ArtistBannerStyle = styled.div`
-  position: absolute;
-  top: 0;
-  left: 0;
   width: 100%;
   height: 25vh;
 
@@ -22,15 +19,16 @@ const ArtistBannerStyle = styled.div`
     margin: 0 auto;
     padding: 0 1rem;
     font-size: 2.3rem;
+    /* font-style: italic; */
   }
 `
 
 const FilterImage = styled.div`
-  z-index: 1;
+  /* z-index: 1;
   height: 100%;
   width: 100%;
   position: absolute;
-  background: rgba(28,28,28,0.6);
+  background: rgba(28,28,28,0.6); */
 `
 
 export {
