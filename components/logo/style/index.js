@@ -8,6 +8,7 @@ const LogoStyle = styled.span`
     margin-right: 4rem;
     transition: ${transition.medium};
     position: relative;
+    z-index: 2;
 
     &:hover {
         transform: scale(1.15);

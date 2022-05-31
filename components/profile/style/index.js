@@ -3,6 +3,7 @@ import { color, fontSize, radius, transition } from '../../../styles/variables';
 
 const ProfileStyle = styled.div`
     position: relative;
+    z-index: 2;
 
     button {
         background-color: inherit;

@@ -19,6 +19,7 @@ const NavItemStyle = styled.li`
     margin-right: 1.5rem;
     transition: ${transition.medium};
     color: ${color.light};
+    z-index: 999;
     
     &:hover {
         color: ${color.accent}
