@@ -14,8 +14,6 @@ const Artist = () => {
   const [songTab, setSongTab] = useState(true);
   const [infoTab, setInfoTab] = useState(false);
 
-  const {user} = useAuth();
-
   const cover1 = require("../../public/images/rose-mixtape-album-cover-art-template-design-59c928b377e5f0e8e9aabc4982ca7e14_screen.jpg");
   const cover2 = require("../../public/images/fairy-tale-cd-cover-art-template-design-7d7816925d2958dd4a4e968954ceadf5_screen.jpg");
 

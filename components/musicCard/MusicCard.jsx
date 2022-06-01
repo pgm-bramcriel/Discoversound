@@ -3,11 +3,13 @@ import Image from 'next/image'
 import { CardContainer, CardLeft, CardRight, CardSongInfo } from './style'
 import { SongContext } from '../../context/SongContext';
 
-const MusicCard = ({image, index, songName, artistName, source, duration}) => {
+const MusicCard = ({image, index, songName, artistName, source, duration, disableClick}) => {
   const {setSong} = useContext(SongContext);
 
   const handleClick = () => {
-    setSong(source);
+    if (disableClick !== true) {
+      setSong(source);
+    }
   }
 
   return (
