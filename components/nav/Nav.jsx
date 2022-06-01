@@ -6,9 +6,8 @@ import { NavLeft, NavStyle } from './style'
 
 const Nav = () => {
   const navItems = [
-    'discover',
     'create',
-    'collection'
+    'favorites'
   ]
 
   return (

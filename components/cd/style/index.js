@@ -5,7 +5,12 @@ const CdStyle = styled.div`
     @keyframes rotate {
         100% {transform: translateX(50%) rotate(360deg);}
     }
-    
+    display: none;
+
+    @media (min-width: ${media.large}) {
+        display: block;
+    }
+
     width: 25rem;
     height: 25rem;
     bottom: -12.5rem;
@@ -19,8 +24,8 @@ const CdStyle = styled.div`
     overflow: hidden;
 
     @media (min-width: ${media.medium}) {
-        width: 35rem;
-        height: 35rem;
+        width: 50vh;
+        height: 50vh;
         right: 0;
         top: 22%;
     }
@@ -29,8 +34,8 @@ const CdStyle = styled.div`
 const CdMiddle = styled.div`
     position: absolute;
     z-index: 1;
-    width: 3rem;
-    height: 3rem;
+    width: 4rem;
+    height: 4rem;
     background-color: ${color.black};
     border-radius: 100%;
     left: 50%;

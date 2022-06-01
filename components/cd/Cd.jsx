@@ -3,7 +3,7 @@ import React from 'react'
 import { CdMiddle, CdStyle } from './style'
 
 const Cd = () => {
-  const image = require("../../public/images/SamSpratt_KidCudi_ManOnTheMoon3_AlbumCover_Web.jpg")
+  const image = require("../../public/images/SamSpratt_KidCudi_ManOnTheMoon3_AlbumCover_Web.jpg");
   return (
     <CdStyle>
       <Image

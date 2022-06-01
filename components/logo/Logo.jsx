@@ -1,11 +1,14 @@
 import React from 'react'
 import Link from 'next/link'
-import { LogoStyle } from './style'
+import { LogoSound, LogoStyle } from './style'
 
 const Logo = () => {
   return (
     <Link href="/">
-      <LogoStyle>D<span>S</span></LogoStyle>
+      <LogoStyle>
+        <p>Discover</p>
+        <LogoSound>Sound</LogoSound>
+      </LogoStyle>
     </Link>
   )
 }

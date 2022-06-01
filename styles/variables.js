@@ -2,8 +2,10 @@ export const color = {
     white: '#f9f9f9',
     black: '#1c1c1c',
     accent: '#F57261',
+    accentDark: '#b94334',
     grey: '#303030',
-    lightGrey: '#707070'
+    lightGrey: '#707070',
+    light: '#c3c3c3',
 }
 
 export const radius = {
