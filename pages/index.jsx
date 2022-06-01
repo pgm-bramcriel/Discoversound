@@ -1,4 +1,4 @@
-import React, {useState, useContext} from 'react'
+import React, {useState, useContext, useEffect} from 'react'
 import Link from 'next/link'
 import Cd from '../components/cd/Cd';
 import BaseLayout from '../layouts/BaseLayout';
@@ -8,6 +8,7 @@ import ArtistCover from '../components/artistCover/ArtistCover';
 import { ArtistInfo, Heading, HomeInfo, HomeInfoMobile } from './styles/home';
 import MainButton from '../components/mainButton/MainButton';
 import { PlayedContext } from '../context/PlayedContext';
+import { getArtists } from '../config/artists';
 const ReactPlayer = dynamic(() => import("react-player"), { ssr: false });
 
 const Home = () => {
@@ -18,6 +19,9 @@ const Home = () => {
   const [controls, setControls] = useState(false);
   const {value} = useContext(PlayedContext);
 
+  useEffect(() => {
+    getArtists();
+  }, [])
   const cover1 = require("../public/images/rose-mixtape-album-cover-art-template-design-59c928b377e5f0e8e9aabc4982ca7e14_screen.jpg");
   const cover2 = require("../public/images/fairy-tale-cd-cover-art-template-design-7d7816925d2958dd4a4e968954ceadf5_screen.jpg");
   
