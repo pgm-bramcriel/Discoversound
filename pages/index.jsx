@@ -17,13 +17,13 @@ const Home = () => {
   const [trackDuration, setTrackDuration] = useState(0);
   const [trackProgress, setTrackProgress] = useState(0);
   const [setPlaying] = useState(false);
-  const [songData, setSongData] = useState('')
+  const [songData, setSongData] = useState('');
   const [controls, setControls] = useState(false);
   const {value} = useContext(PlayedContext);
 
   const colRef = collection(db, 'songs');
 
-  const getArtists = async () => {
+  const getSongs = async () => {
     getDocs(colRef)
     .then((snapshot) => {
       let data = [];
@@ -35,28 +35,8 @@ const Home = () => {
   }
 
   useEffect(() => {
-    getArtists();
+    getSongs();
   }, [])
-  
-  const cover1 = require("../public/images/rose-mixtape-album-cover-art-template-design-59c928b377e5f0e8e9aabc4982ca7e14_screen.jpg");
-  const cover2 = require("../public/images/fairy-tale-cd-cover-art-template-design-7d7816925d2958dd4a4e968954ceadf5_screen.jpg");
-  
-  const tracks = [
-    {
-      artist: 'Rose Mixtape',
-      title: 'Late Night Drive',
-      src: 'https://audioplayer.madza.dev/Madza-Late_Night_Drive.mp3',
-      artistCover: cover1,
-      id: '1'
-    },
-    {
-      artist: 'Fairy Tale',
-      title: 'Chords of Life',
-      src: 'https://audioplayer.madza.dev/Madza-Chords_of_Life.mp3',
-      artistCover: cover2,
-      id: '2'
-    }
-  ];
 
   const handleProgress = (progress) => {
     setTrackProgress(progress.playedSeconds);
