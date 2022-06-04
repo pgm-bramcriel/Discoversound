@@ -29,7 +29,7 @@ const Favorites = () => {
           data.push({...doc.data(), id: doc.id})
         })
         data = data.filter((item) => {
-          return item.userId === `1`;
+          return item.userId === user?.uuid;
         });
         setFavoritesId(data);
       })
