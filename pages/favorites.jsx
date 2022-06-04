@@ -14,38 +14,11 @@ const Favorites = () => {
   const [song, setSong] = useState('');
   const [trackDuration, setTrackDuration] = useState(0);
   const [trackProgress, setTrackProgress] = useState(0);
-  const [songData, setSongData] = useState();
   const [favoritesId, setFavoritesId] = useState();
   const [favoriteSongs, setFavoriteSongs] = useState();
-  const [state, setState] = useState(false);
 
   const songsRef = collection(db, 'songs');
   const favoritesRef = collection(db, 'favorites');
-
-  // const getFavorites = async () => {
-  //   getDocs(favoritesRef)
-  //   .then((snapshot) => {
-  //     let data = [];
-  //     snapshot.docs.forEach((doc) => {
-  //       data.push({...doc.data(), id: doc.id})
-  //     })
-  //     data = data.filter((item) => {
-  //       return item.userId === `1`;
-  //     });
-  //     setFavoritesId(data);
-  //   })
-  // }
-
-  // const getSongs = async () => {
-  //   getDocs(songsRef)
-  //   .then((snapshot) => {
-  //     let data = [];
-  //     snapshot.docs.forEach((doc) => {
-  //       data.push({...doc.data(), id: doc.id})
-  //     })
-  //     setSongData(data);
-  //   })
-  // }
 
   useEffect(() => {
     if (!favoriteSongs) {
@@ -74,9 +47,6 @@ const Favorites = () => {
       })
     }
   }, [favoritesId])
-
-  // console.log('favorites ids:', favoritesId);
-  // console.log('filtered array:', favoriteSongs);
 
   const handleProgress = (progress) => {
     setTrackProgress(progress.playedSeconds);

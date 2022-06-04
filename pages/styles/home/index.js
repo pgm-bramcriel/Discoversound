@@ -76,6 +76,10 @@ const HomeInfo = styled.div`
           fill: ${color.black};
         }
 
+        .favorite {
+          fill: ${color.accent};
+        }
+
         &:hover {
           path {
             fill: ${color.accent};
@@ -138,7 +142,10 @@ const HomeInfoMobile = styled.div`
 
         path {
           transition: ${transition.medium};
-          fill: ${color.black};
+        }
+
+        .favorite {
+          fill: ${color.accent};
         }
 
         &:hover {
