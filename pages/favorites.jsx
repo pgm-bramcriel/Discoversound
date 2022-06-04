@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
 import ReactPlayer from 'react-player';
 import BaseTitle from '../components/baseTitle/BaseTitle'
 import MusicCard from '../components/musicCard/MusicCard';
@@ -6,15 +6,77 @@ import BaseLayout from '../layouts/BaseLayout';
 import { SongContext } from '../context/SongContext';
 import Player from '../components/player/Player';
 import { useAuth } from '../context/AuthContext';
-import FavoriteArtistCover from '../components/favoriteArtistCover/FavoriteArtistCover';
+import { collection, getDocs } from 'firebase/firestore';
+import { db } from '../config/firebase';
 
 const Favorites = () => {
   const {user} = useAuth();
   const [song, setSong] = useState('');
   const [trackDuration, setTrackDuration] = useState(0);
   const [trackProgress, setTrackProgress] = useState(0);
-  const cover1 = require("../public/images/rose-mixtape-album-cover-art-template-design-59c928b377e5f0e8e9aabc4982ca7e14_screen.jpg");
-  const cover2 = require("../public/images/fairy-tale-cd-cover-art-template-design-7d7816925d2958dd4a4e968954ceadf5_screen.jpg");
+  const [songData, setSongData] = useState();
+  const [favoritesId, setFavoritesId] = useState();
+  const [favoriteSongs, setFavoriteSongs] = useState();
+  const [state, setState] = useState(false);
+
+  const songsRef = collection(db, 'songs');
+  const favoritesRef = collection(db, 'favorites');
+
+  // const getFavorites = async () => {
+  //   getDocs(favoritesRef)
+  //   .then((snapshot) => {
+  //     let data = [];
+  //     snapshot.docs.forEach((doc) => {
+  //       data.push({...doc.data(), id: doc.id})
+  //     })
+  //     data = data.filter((item) => {
+  //       return item.userId === `1`;
+  //     });
+  //     setFavoritesId(data);
+  //   })
+  // }
+
+  // const getSongs = async () => {
+  //   getDocs(songsRef)
+  //   .then((snapshot) => {
+  //     let data = [];
+  //     snapshot.docs.forEach((doc) => {
+  //       data.push({...doc.data(), id: doc.id})
+  //     })
+  //     setSongData(data);
+  //   })
+  // }
+
+  useEffect(() => {
+    if (!favoriteSongs) {
+      getDocs(favoritesRef)
+      .then((snapshot) => {
+        let data = [];
+        snapshot.docs.forEach((doc) => {
+          data.push({...doc.data(), id: doc.id})
+        })
+        data = data.filter((item) => {
+          return item.userId === `1`;
+        });
+        setFavoritesId(data);
+      })
+    }
+
+    if(favoritesId) {
+      getDocs(songsRef)
+      .then((snapshot) => {
+        let data = [];
+        snapshot.docs.forEach((doc) => {
+          data.push({...doc.data(), id: doc.id})
+        })
+        data = data.filter(song => favoritesId.some(favorite => song.id === favorite.songId));
+        setFavoriteSongs(data);
+      })
+    }
+  }, [favoritesId])
+
+  // console.log('favorites ids:', favoritesId);
+  // console.log('filtered array:', favoriteSongs);
 
   const handleProgress = (progress) => {
     setTrackProgress(progress.playedSeconds);
@@ -24,24 +86,9 @@ const Favorites = () => {
     setTrackDuration(duration);
   }
 
-  const tracks = [
-    {
-      artist: 'Rose Mixtape',
-      title: 'Late Night Drive',
-      src: 'https://audioplayer.madza.dev/Madza-Late_Night_Drive.mp3',
-      artistCover: cover1
-    },
-    {
-      artist: 'Fairy Tale',
-      title: 'Chords of Life',
-      src: 'https://audioplayer.madza.dev/Madza-Chords_of_Life.mp3',
-      artistCover: cover2
-    }
-  ]
-
-  const currentArtist = tracks.filter((track) => {
-    return track.src === song;
-  });
+  // const currentArtist = tracks.filter((track) => {
+  //   return track.src === song;
+  // });
 
   return (
     <>
@@ -49,15 +96,17 @@ const Favorites = () => {
         <SongContext.Provider value={{song, setSong}}>
           <BaseLayout>
             <BaseTitle subtitle={'your'} title={'favorites'}/>
-            <div style={{
-              marginTop : '4rem'
-            }}>
-              {tracks.map((track, index) => {
-                return (
-                  <MusicCard key={index} duration={trackDuration} source={track.src} index={index + 1} songName={track.title} artistName={track.artist} image={track.artistCover}/>
-                )
-              })}
-            </div>
+            {favoriteSongs &&
+              <div style={{
+                marginTop : '4rem'
+              }}>
+                {favoriteSongs.map((song, index) => {
+                  return (
+                    <MusicCard key={index} source={song.filePath} index={index + 1} songName={song.name} artistName={song.artistName} image={song.image}/>
+                  )
+                })}
+              </div>
+            }
             <ReactPlayer
                 onProgress={handleProgress}
                 onDuration={handleDuration}
