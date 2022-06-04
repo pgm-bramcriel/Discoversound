@@ -8,7 +8,7 @@ const AllSongs = ({data}) => {
       <SubTitle>All songs</SubTitle>
       {data.map((track, index) => {
         return (
-          <MusicCard key={index} source={track.src} index={index + 1} songName={track.title} artistName={track.artist} image={track.artistCover} disableClick/>
+          <MusicCard key={index} source={track.filePath} index={index + 1} songName={track.name} artistName={track.artistName} image={track.image} disableClick/>
         )
       })}
     </div>
