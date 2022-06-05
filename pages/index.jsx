@@ -67,7 +67,7 @@ const Home = () => {
   const handleProgress = (progress) => {
     setTrackProgress(progress.playedSeconds);
 
-    if (progress.playedSeconds === trackDuration) {
+    if (progress.playedSeconds === trackDuration || progress.playedSeconds > trackDuration) {
       setTrackIndex(trackIndex + 1);
 
       if (songData.length - 1 === trackIndex) {
@@ -103,11 +103,11 @@ const Home = () => {
     }
   }
 
-  // const handleShuffle = (e) => {
-  //   e.preventDefault();
-  //   setTrackIndex(Math.floor(Math.random() * songData.length));
-  //   console.log(Math.floor(Math.random() * songData.length));
-  // }
+  const handleShuffle = (e) => {
+    e.preventDefault();
+    setTrackIndex(Math.floor(Math.random() * songData.length));
+    console.log(Math.floor(Math.random() * songData.length));
+  }
 
   return (
     <>

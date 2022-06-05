@@ -15,7 +15,8 @@ const Create = () => {
   const [file, setFile] = useState();
   const [songName, setSongName] = useState('');
   const [songCover, setSongCover] = useState();
-  const [progress, setProgress] = useState(0);
+  const [fileProgress, setFileProgress] = useState(0);
+  const [imageProgress, setImageProgress] = useState(0);
   const [songUrl, setSongUrl] = useState();
   const [coverUrl, setCoverUrl] = useState();
 
@@ -35,7 +36,7 @@ const Create = () => {
 
     uploadTask.on('state_changed', (snapshot) => {
       const progress = Math.round((snapshot.bytesTransferred / snapshot.totalBytes) * 100);
-      setProgress(progress);
+      setFileProgress(progress);
     }, (err) => console.log(err),
     () => {
       getDownloadURL(uploadTask.snapshot.ref)
@@ -53,7 +54,7 @@ const Create = () => {
 
     coverUploadTask.on('state_changed', (snapshot) => {
       const progress = Math.round((snapshot.bytesTransferred / snapshot.totalBytes) * 100);
-      setProgress(progress);
+      setImageProgress(progress);
     }, (err) => console.log(err),
     () => {
       getDownloadURL(coverUploadTask.snapshot.ref)
@@ -111,6 +112,8 @@ const Create = () => {
                   placeholder='examplefile.mp3'
                 />
                 <MainButton>Upload!</MainButton>
+                <span>File : ${fileProgress} %</span>
+                <span>Image : ${imageProgress} %</span>
               </form>
               <section>
                 <Image

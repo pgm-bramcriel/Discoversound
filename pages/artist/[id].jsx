@@ -77,10 +77,10 @@ const Artist = () => {
     setSongTab(false);
     setInfoTab(true);
   }
-  
+
   return (
     <SongContext.Provider value={{song, setSong}}>
-      <BannerLayout title={artistData.length > 0 ? artistData[0].name : 'Loading...'} coverImage={artistData.length > 0 ? artistData[0].coverImage : null}>
+      <BannerLayout title={artistData.length > 0 ? artistData[0].artistName : 'Loading...'} coverImage={artistData.length > 0 ? artistData[0].coverImage : null}>
         <ArtistNav>
           <li>
             <button
