@@ -4,7 +4,6 @@ import SubTitle from '../subTitle/SubTitle'
 import Image from 'next/image';
 
 const TopSongs = ({data}) => {
-  data = data.sort((a, b ) => a.artistName.localCompare(b.firstname));
   data = data.slice(0, 5);
   return (
     <>
