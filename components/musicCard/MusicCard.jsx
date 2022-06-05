@@ -18,8 +18,10 @@ const MusicCard = ({image, index, songName, artistName, source, duration, disabl
         <span>#{index}</span>
         <figure>
           <Image
-            src={require(`../../public/images/${image}`)}
+            src={image}
             alt='image cover'
+            height={1200}
+            width={1200}
           />
         </figure>
         <CardSongInfo>

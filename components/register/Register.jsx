@@ -9,7 +9,7 @@ const Register = () => {
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const {register} = useAuth();
+  const {register, user} = useAuth();
 
   const handleRegister = async (e) => {
     e.preventDefault();
@@ -26,14 +26,19 @@ const Register = () => {
   return (
     <RegisterStyled>
       <h2>Register</h2>
-      <form onSubmit={handleRegister}>
-        <div>
-          <input onChange={(e) => setUsername(e.target.value)} type='text' placeholder='Username'></input>
-          <input onChange={(e) => setEmail(e.target.value)} type='email' placeholder='Email'></input>
-          <input onChange={(e) => setPassword(e.target.value)} type='password' placeholder='Password'></input>
-        </div>
-        <MainButton>Register</MainButton>
-      </form>
+      {!user &&
+        <form onSubmit={handleRegister}>
+          <div>
+            <input onChange={(e) => setUsername(e.target.value)} type='text' placeholder='Username'></input>
+            <input onChange={(e) => setEmail(e.target.value)} type='email' placeholder='Email'></input>
+            <input onChange={(e) => setPassword(e.target.value)} type='password' placeholder='Password'></input>
+          </div>
+          <MainButton>Register</MainButton>
+        </form>
+      }
+      {user &&
+        <p>You are registered!</p>
+      }
     </RegisterStyled>
   )
 }

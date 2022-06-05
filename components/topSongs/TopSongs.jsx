@@ -16,9 +16,10 @@ const TopSongs = ({data}) => {
               <TopSongsStyle>
                 <SongPosition>{index + 1}</SongPosition>
                 <Image
-                  src={require(`../../public/images/${song.image}`)}
+                  src={song.image}
                   alt='image'
-                  objectFit='contain'
+                  objectFit='cover'
+                  layout='fill'
                 />
                 <SongFilter />
                 <SongName>{song.name}</SongName>

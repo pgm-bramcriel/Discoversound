@@ -18,7 +18,7 @@ const Home = () => {
   const [trackDuration, setTrackDuration] = useState(0);
   const [trackProgress, setTrackProgress] = useState(0);
   const [setPlaying] = useState(false);
-  const [songData, setSongData] = useState('');
+  const [songData, setSongData] = useState();
   const [controls, setControls] = useState(false);
   const [isFavorited, setIsFavorited] = useState(false);
   const [filteredData, setFilteredData] = useState([]);
@@ -117,7 +117,7 @@ const Home = () => {
             <Cd />
             {/* <button onClick={handleShuffle}>Shuffle</button> */}
             <div style={{
-              display: 'none'
+              display: 'block'
             }}>
               <p>Now playing: {songData[trackIndex].name}</p>
               <button onClick={() => setPlaying(true)}>Play</button>
@@ -146,7 +146,7 @@ const Home = () => {
                 <MainButton>More by {songData[trackIndex].artistName}</MainButton>
               </HomeInfoMobile>
             <ArtistInfo>
-              <ArtistCover image={require(`../public/images/${songData[trackIndex].image}`)}/>
+              <ArtistCover image={songData[trackIndex].image}/>
               <HomeInfo>
                 <h2>
                   <svg xmlns="http://www.w3.org/2000/svg" width="28.673" height="33.789" viewBox="0 0 28.673 33.789">
