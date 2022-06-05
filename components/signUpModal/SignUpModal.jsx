@@ -6,8 +6,8 @@ import Register from '../register/Register';
 import { useAuth } from '../../context/AuthContext';
 
 const SignUpModal = () => {
-  const [loginToggle, setLoginToggle] = useState(false);
-  const [registerToggle, setRegisterToggle] = useState(true);
+  const [loginToggle, setLoginToggle] = useState(true);
+  const [registerToggle, setRegisterToggle] = useState(false);
   const {setModalValue} = useContext(ModalContext);
 
   const handleSignIn = () => {

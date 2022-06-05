@@ -77,9 +77,7 @@ const Artist = () => {
     setSongTab(false);
     setInfoTab(true);
   }
-
-  console.log(artistData);
-
+  
   return (
     <SongContext.Provider value={{song, setSong}}>
       <BannerLayout title={artistData.length > 0 ? artistData[0].name : 'Loading...'} coverImage={artistData.length > 0 ? artistData[0].coverImage : null}>
