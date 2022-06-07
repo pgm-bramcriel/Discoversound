@@ -1,6 +1,12 @@
 import styled from 'styled-components';
 import { color, radius, transition } from '../../../styles/variables';
 
+const StateContainer = styled.div`
+  .playing {
+    background-color: ${color.grey};
+  }
+`
+
 const CardContainer = styled.div`
   display: flex;
   justify-content: space-between;
@@ -54,5 +60,6 @@ export {
   CardContainer,
   CardLeft,
   CardRight,
-  CardSongInfo
+  CardSongInfo,
+  StateContainer
 }

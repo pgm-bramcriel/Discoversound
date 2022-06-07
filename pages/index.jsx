@@ -103,10 +103,13 @@ const Home = () => {
     }
   }
 
-  const handleShuffle = (e) => {
+  const handleNext = (e) => {
     e.preventDefault();
-    setTrackIndex(Math.floor(Math.random() * songData.length));
-    console.log(Math.floor(Math.random() * songData.length));
+    if (trackIndex === songData.length - 1) {
+      setTrackIndex(0);
+    } else {
+      setTrackIndex(trackIndex + 1);  
+    }
   }
 
   return (
@@ -115,7 +118,6 @@ const Home = () => {
         {songData &&
           <>
             <Cd />
-            {/* <button onClick={handleShuffle}>Shuffle</button> */}
             <div style={{
               display: 'none'
             }}>
@@ -173,7 +175,7 @@ const Home = () => {
           </>
         }
       </BaseLayout>
-      <Player value={trackProgress} max={trackDuration}/>
+      <Player enableNext onClick={handleNext} value={trackProgress} max={trackDuration}/>
     </>
   )
 }
