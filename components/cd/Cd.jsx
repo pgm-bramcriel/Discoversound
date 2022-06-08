@@ -3,7 +3,6 @@ import React from 'react'
 import { CdMiddle, CdStyle } from './style'
 
 const Cd = ({image}) => {
-  console.log(image);
   return (
     <CdStyle>
       <Image

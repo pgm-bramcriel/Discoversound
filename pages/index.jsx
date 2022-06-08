@@ -2,7 +2,6 @@ import React, {useState, useContext, useEffect} from 'react'
 import Link from 'next/link'
 import Cd from '../components/cd/Cd';
 import BaseLayout from '../layouts/BaseLayout';
-import dynamic from 'next/dynamic'
 import Player from '../components/player/Player';
 import ArtistCover from '../components/artistCover/ArtistCover';
 import { ArtistInfo, Heading, HomeInfo, HomeInfoMobile } from './styles/home';
@@ -11,10 +10,10 @@ import { PlayedContext } from '../context/PlayedContext';
 import { addDoc, collection, deleteDoc, doc, getDocs } from 'firebase/firestore';
 import { db } from '../config/firebase';
 import { useAuth } from '../context/AuthContext';
-const ReactPlayer = dynamic(() => import("react-player"), { ssr: false });
+import ReactPlayer from 'react-player';
 
 const Home = () => {
-  const [trackIndex, setTrackIndex] = useState(0);
+  const [trackIndex, setTrackIndex] = useState(sessionStorage.getItem('savedTrackIndex') !== null ? parseInt(sessionStorage.getItem('savedTrackIndex')) : 0);
   const [trackDuration, setTrackDuration] = useState(0);
   const [trackProgress, setTrackProgress] = useState(0);
   const [setPlaying] = useState(false);
@@ -24,6 +23,7 @@ const Home = () => {
   const [filteredData, setFilteredData] = useState([]);
   const {value} = useContext(PlayedContext);
   const {user} = useAuth();
+  const ref = React.createRef();
 
   const colRef = collection(db, 'songs');
   const favoritesRef = collection(db, 'favorites');
@@ -62,16 +62,19 @@ const Home = () => {
         setIsFavorited(filterFavorites);
       })
     }
-  }, [songData, isFavorited, user, trackIndex])
+  }, [songData, isFavorited, user, trackIndex]);
 
   const handleProgress = (progress) => {
     setTrackProgress(progress.playedSeconds);
+    sessionStorage.setItem('savedProgress', progress.playedSeconds);
 
     if (progress.playedSeconds === trackDuration || progress.playedSeconds > trackDuration) {
       setTrackIndex(trackIndex + 1);
+      sessionStorage.setItem('savedTrackIndex', trackIndex + 1);
 
       if (songData.length - 1 === trackIndex) {
         setTrackIndex(0);
+        sessionStorage.setItem('savedTrackIndex', 0);
       }
     }
   }
@@ -107,8 +110,10 @@ const Home = () => {
     e.preventDefault();
     if (trackIndex === songData.length - 1) {
       setTrackIndex(0);
+      sessionStorage.setItem('savedTrackIndex', 0);
     } else {
       setTrackIndex(trackIndex + 1);  
+      sessionStorage.setItem('savedTrackIndex', trackIndex + 1);
     }
   }
 
@@ -165,13 +170,16 @@ const Home = () => {
                 <MainButton>More by {songData[trackIndex].artistName}</MainButton>
               </HomeInfo>
             </ArtistInfo>
-            <ReactPlayer
-              controls={controls}
-              playing={value}
-              onProgress={handleProgress}
-              onDuration={handleDuration}
-              volume={0}
-              url={songData[trackIndex].filePath} />
+            <div>
+              <ReactPlayer
+                ref={ref}
+                controls={controls}
+                playing={value}
+                onProgress={handleProgress}
+                onDuration={handleDuration}
+                volume={0}
+                url={songData[trackIndex].filePath} />
+            </div>
           </>
         }
       </BaseLayout>
