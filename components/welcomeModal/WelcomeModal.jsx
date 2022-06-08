@@ -8,6 +8,7 @@ const WelcomeModal = () => {
   const [clicked, setClicked] = useState(false);
   const {value, setValue} = useContext(PlayedContext);
   const {user} = useAuth();
+  let hasVisited = localStorage.getItem('savedProgress');
 
   const handleClick = () => {
     setClicked(true);
@@ -26,7 +27,12 @@ const WelcomeModal = () => {
           {user === null &&
             <h2>Welcome back!</h2>
           }
-          <MainButton onClick={handleClick}>Start Listening!</MainButton>
+          {hasVisited &&
+            <MainButton onClick={handleClick}>Continue Listening!</MainButton>
+          }
+          {!hasVisited &&
+            <MainButton onClick={handleClick}>Start Listening!</MainButton>
+          }
           <svg xmlns="http://www.w3.org/2000/svg" width="336.207" height="383.561" viewBox="0 0 336.207 383.561">
             <g id="undraw_welcoming_re_x0qo" transform="translate(0 0)">
               <path id="Path_4" data-name="Path 4" d="M580.073,748.356l-.428-9.623-.134-.07a5.913,5.913,0,0,0-8.377,6.917c1.378,4.674,2.3,9.713,4.827,13.8a18.694,18.694,0,0,0,13.709,8.639l5.826,3.567a31.326,31.326,0,0,0-6.6-25.384,30.258,30.258,0,0,0-5.561-5.167C581.937,744.717,580.073,748.356,580.073,748.356Z" transform="translate(-418.918 -388.529)" fill="#f2f2f2"/>

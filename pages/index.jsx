@@ -13,7 +13,7 @@ import { useAuth } from '../context/AuthContext';
 import ReactPlayer from 'react-player';
 
 const Home = () => {
-  const [trackIndex, setTrackIndex] = useState(sessionStorage.getItem('savedTrackIndex') !== null ? parseInt(sessionStorage.getItem('savedTrackIndex')) : 0);
+  const [trackIndex, setTrackIndex] = useState(localStorage.getItem('savedTrackIndex') !== null ? parseInt(localStorage.getItem('savedTrackIndex')) : 0);
   const [trackDuration, setTrackDuration] = useState(0);
   const [trackProgress, setTrackProgress] = useState(0);
   const [setPlaying] = useState(false);
@@ -72,22 +72,22 @@ const Home = () => {
   }, [ref])
 
   useEffect(() => {
-      if (state && sessionStorage.getItem('savedProgress') !== null) {
-        ref.current.seekTo(sessionStorage.getItem('savedProgress'));
+      if (state && localStorage.getItem('savedProgress') !== null) {
+        ref.current.seekTo(localStorage.getItem('savedProgress'));
       }
   }, [state])
 
   const handleProgress = (progress) => {
     setTrackProgress(progress.playedSeconds); 
-    sessionStorage.setItem('savedProgress', progress.playedSeconds);
+    localStorage.setItem('savedProgress', progress.playedSeconds);
 
     if (progress.playedSeconds === trackDuration || progress.playedSeconds > trackDuration) {
       setTrackIndex(trackIndex + 1);
-      sessionStorage.setItem('savedTrackIndex', trackIndex + 1);
+      localStorage.setItem('savedTrackIndex', trackIndex + 1);
 
       if (songData.length - 1 === trackIndex) {
         setTrackIndex(0);
-        sessionStorage.setItem('savedTrackIndex', 0);
+        localStorage.setItem('savedTrackIndex', 0);
       }
     }
   }
@@ -123,10 +123,10 @@ const Home = () => {
     e.preventDefault();
     if (trackIndex === songData.length - 1) {
       setTrackIndex(0);
-      sessionStorage.setItem('savedTrackIndex', 0);
+      localStorage.setItem('savedTrackIndex', 0);
     } else {
       setTrackIndex(trackIndex + 1);
-      sessionStorage.setItem('savedTrackIndex', trackIndex + 1);
+      localStorage.setItem('savedTrackIndex', trackIndex + 1);
     }
   }
 
