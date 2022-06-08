@@ -21,6 +21,7 @@ const Home = () => {
   const [controls, setControls] = useState(false);
   const [isFavorited, setIsFavorited] = useState(false);
   const [filteredData, setFilteredData] = useState([]);
+  const [state, setState] = useState(false);
   const {value} = useContext(PlayedContext);
   const {user} = useAuth();
   const ref = React.createRef();
@@ -38,7 +39,7 @@ const Home = () => {
       setSongData(data);
     })
   }
-
+  
   useEffect(() => {
     if (!songData) {
       getSongs();
@@ -64,8 +65,20 @@ const Home = () => {
     }
   }, [songData, isFavorited, user, trackIndex]);
 
+  useEffect(() => {
+    if (ref.current && state === false) {
+      setState(true);
+    }
+  }, [ref])
+
+  useEffect(() => {
+      if (state && sessionStorage.getItem('savedProgress') !== null) {
+        ref.current.seekTo(sessionStorage.getItem('savedProgress'));
+      }
+  }, [state])
+
   const handleProgress = (progress) => {
-    setTrackProgress(progress.playedSeconds);
+    setTrackProgress(progress.playedSeconds); 
     sessionStorage.setItem('savedProgress', progress.playedSeconds);
 
     if (progress.playedSeconds === trackDuration || progress.playedSeconds > trackDuration) {
@@ -112,7 +125,7 @@ const Home = () => {
       setTrackIndex(0);
       sessionStorage.setItem('savedTrackIndex', 0);
     } else {
-      setTrackIndex(trackIndex + 1);  
+      setTrackIndex(trackIndex + 1);
       sessionStorage.setItem('savedTrackIndex', trackIndex + 1);
     }
   }
@@ -177,7 +190,7 @@ const Home = () => {
                 playing={value}
                 onProgress={handleProgress}
                 onDuration={handleDuration}
-                volume={0}
+                volume={0.1}
                 url={songData[trackIndex].filePath} />
             </div>
           </>
