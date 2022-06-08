@@ -117,7 +117,7 @@ const Home = () => {
       <BaseLayout>
         {songData &&
           <>
-            <Cd />
+            <Cd image={songData[trackIndex].image}/>
             <div style={{
               display: 'none'
             }}>
