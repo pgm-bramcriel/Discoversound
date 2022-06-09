@@ -190,7 +190,7 @@ const Home = () => {
                 playing={value}
                 onProgress={handleProgress}
                 onDuration={handleDuration}
-                volume={0.1}
+                volume={0}
                 url={songData[trackIndex].filePath} />
             </div>
           </>

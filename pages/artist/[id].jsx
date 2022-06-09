@@ -8,6 +8,7 @@ import BannerLayout from '../../layouts/BannerLayout';
 import { db } from '../../config/firebase';
 import { collection, getDocs } from 'firebase/firestore';
 import {useRouter} from 'next/router';
+import ArtistDetailInfo from '../../components/artistDetailInfo/ArtistDetailInfo';
 
 const Artist = () => {
   const [trackDuration, setTrackDuration] = useState(0);
@@ -15,8 +16,8 @@ const Artist = () => {
   const [songData, setSongData] = useState('');
   const [artistData, setArtistData] = useState('');
   const [song, setSong] = useState('');
-  const [songTab, setSongTab] = useState(true);
-  const [infoTab, setInfoTab] = useState(false);
+  const [songTab, setSongTab] = useState(false);
+  const [infoTab, setInfoTab] = useState(true);
 
   const router = useRouter();
 
@@ -84,16 +85,16 @@ const Artist = () => {
         <ArtistNav>
           <li>
             <button
-            style={{color: songTab ? '#F57261' : '#f9f9f9'}}
-            onClick={toggleSongTab}>
-              Songs
+            style={{color: infoTab ? '#F57261' : '#f9f9f9'}}
+            onClick={toggleInfoTab}>
+              Info
             </button>
           </li>
           <li>
             <button
-            style={{color: infoTab ? '#F57261' : '#f9f9f9'}}
-            onClick={toggleInfoTab}>
-              Info
+            style={{color: songTab ? '#F57261' : '#f9f9f9'}}
+            onClick={toggleSongTab}>
+              Songs
             </button>
           </li>
         </ArtistNav>
@@ -110,6 +111,14 @@ const Artist = () => {
               </>
             }
           </div>
+        }
+        {
+          infoTab &&
+          <>
+            {songData &&
+              <ArtistDetailInfo songData={songData}/>
+            }
+          </>
         }
       <ReactPlayer
         onProgress={handleProgress}
