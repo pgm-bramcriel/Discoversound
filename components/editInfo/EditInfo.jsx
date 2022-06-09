@@ -35,6 +35,9 @@ const EditInfo = ({user}) => {
     if (artistImage) {
       handleFileUpload();
     }
+    if (!artistImage) {
+      handleInfoUpdate();
+    }
   }
 
   const handleFileUpload = () => {
@@ -50,6 +53,16 @@ const EditInfo = ({user}) => {
       .then(url => setArtistImageUrl(url))
     }
     )
+  }
+
+  const handleInfoUpdate = () => {
+    const artistRef = doc(db, 'artists', currentArtist[0].id);
+    setDoc(artistRef, {
+      artistName: artistName ? artistName : currentArtist[0].artistName,
+      userId: user.uuid,
+      artistCover: currentArtist[0].artistCover ? currentArtist[0].artistCover : null,
+      description: description ? description : 'This artist has no description yet...'
+    })
   }
 
   useEffect(() => {
