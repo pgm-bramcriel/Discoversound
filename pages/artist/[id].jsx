@@ -116,7 +116,11 @@ const Artist = () => {
           infoTab &&
           <>
             {songData &&
-              <ArtistDetailInfo songData={songData}/>
+              <>
+                {artistData &&
+                  <ArtistDetailInfo songData={songData} artistData={artistData}/>
+                }
+              </>
             }
           </>
         }

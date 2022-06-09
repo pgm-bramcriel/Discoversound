@@ -6,6 +6,7 @@ import AllSongs from '../components/allSongs/AllSongs'
 import { useAuth } from '../context/AuthContext'
 import { db } from '../config/firebase'
 import { collection, getDocs } from 'firebase/firestore'
+import EditInfo from '../components/editInfo/EditInfo'
 
 const Profile = () => {
   const [songTab, setSongTab] = useState(true);
@@ -70,6 +71,13 @@ const Profile = () => {
               <TopSongs data={songData}/>
               <AllSongs data={songData}/>
             </>
+          }
+        </>
+      }
+      {infoTab &&
+        <>
+          {user &&
+            <EditInfo user={user}/>
           }
         </>
       }

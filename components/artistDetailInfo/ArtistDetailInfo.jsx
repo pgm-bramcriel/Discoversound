@@ -3,7 +3,8 @@ import Image from 'next/image';
 import { ArtistDetailContainer, ArtistDetailLeft, ArtistDetailRight, Filter, InfoCard, SocialMediaContainer } from './style'
 import Link from 'next/link';
 
-const ArtistDetailInfo = ({songData}) => {
+const ArtistDetailInfo = ({songData, artistData}) => {
+  console.log(artistData);
   return (
     <ArtistDetailContainer>
       <ArtistDetailLeft>
@@ -37,7 +38,7 @@ const ArtistDetailInfo = ({songData}) => {
           <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
             <path id="Icon_material-person" data-name="Icon material-person" d="M18,18a6,6,0,1,0-6-6A6,6,0,0,0,18,18Zm0,3c-4.005,0-12,2.01-12,6v3H30V27C30,23.01,22.005,21,18,21Z" transform="translate(-6 -6)"/>
           </svg>
-          <p>Artist Name</p>
+          <p>{artistData.length > 0 ? artistData[0].artistName : 'User has no account...'}</p>
         </InfoCard>
         <InfoCard>
           <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 28 28">
@@ -49,7 +50,7 @@ const ArtistDetailInfo = ({songData}) => {
           <svg xmlns="http://www.w3.org/2000/svg" width="24" height="30" viewBox="0 0 24 30">
             <path id="Icon_material-description" data-name="Icon material-description" d="M21,3H9A3,3,0,0,0,6.015,6L6,30a3,3,0,0,0,2.985,3H27a3.009,3.009,0,0,0,3-3V12Zm3,24H12V24H24Zm0-6H12V18H24Zm-4.5-7.5V5.25l8.25,8.25Z" transform="translate(-6 -3)"/>
           </svg>
-          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc sollicitudin purus  risus aliquam, eget interdum sapien iaculis. Sed elementum, sapien id elementum egestas, lacus libero interdum enim, vulputate facilisis lectus nisl sit amet ligula.</p>
+          <p>{artistData.length > 0 ? (artistData[0].description ? artistData[0].description : 'User has no description...') : 'User has no account...'}</p>
         </InfoCard>
       </ArtistDetailRight>
     </ArtistDetailContainer>

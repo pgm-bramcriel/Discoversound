@@ -22,12 +22,14 @@ const Home = () => {
   const [isFavorited, setIsFavorited] = useState(false);
   const [filteredData, setFilteredData] = useState([]);
   const [state, setState] = useState(false);
+  const [currentArtist, setCurrentArtist] = useState([]);
   const {value} = useContext(PlayedContext);
   const {user} = useAuth();
   const ref = React.createRef();
 
   const colRef = collection(db, 'songs');
   const favoritesRef = collection(db, 'favorites');
+  const artistsRef = collection(db, 'artists');
 
   const getSongs = async () => {
     getDocs(colRef)
@@ -130,6 +132,22 @@ const Home = () => {
     }
   }
 
+  useEffect(() => {
+    if (songData) {
+      getDocs(artistsRef)
+      .then((snapshot) => {
+        let data = [];
+        snapshot.docs.forEach((doc) => {
+          data.push({...doc.data(), id: doc.id})
+        })
+        data = data.filter((artist) => {
+          return artist.userId === songData[trackIndex].userId;
+        });
+        setCurrentArtist(data);
+      })
+    }
+  }, [trackIndex, songData]);
+
   return (
     <>
       <BaseLayout>
@@ -146,9 +164,16 @@ const Home = () => {
             </div>
             <Heading>
               <p>Discover</p>
-              <Link href={`artist/${songData[trackIndex].userId}`}>
-                <h1>{songData[trackIndex].artistName}</h1>
-              </Link>
+              {currentArtist.length > 0 &&
+                <Link href={`artist/${songData[trackIndex].userId}`}>
+                  <h1>{currentArtist[0].artistName}</h1>
+                </Link>
+              }
+              {currentArtist.length === 0 &&
+                <Link href={`artist/${songData[trackIndex].userId}`}>
+                    <h1>{songData[trackIndex].artistName}</h1>
+                </Link>
+              }
             </Heading>
             <HomeInfoMobile>
                 <h2>
@@ -179,7 +204,12 @@ const Home = () => {
                     </svg>
                   </button>
                 </h2>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut pharetra lectus et suscipit convallis. Pellentesque fringilla quam id urna bibendum aliquam. Fusce finibus.</p>
+                {currentArtist.length > 0 &&
+                  <p>{currentArtist[0].description ? currentArtist[0].description : 'This artist has no description...'}</p>
+                }
+                {currentArtist.length === 0 &&
+                  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut pharetra lectus et suscipit convallis. Pellentesque fringilla quam id urna bibendum aliquam. Fusce finibus.</p>
+                }
                 <MainButton>More by {songData[trackIndex].artistName}</MainButton>
               </HomeInfo>
             </ArtistInfo>
