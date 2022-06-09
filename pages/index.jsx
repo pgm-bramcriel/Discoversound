@@ -191,7 +191,7 @@ const Home = () => {
                 <MainButton>More by {songData[trackIndex].artistName}</MainButton>
               </HomeInfoMobile>
             <ArtistInfo>
-              <ArtistCover image={songData[trackIndex].image}/>
+              <ArtistCover image={currentArtist.length > 0 ? (currentArtist[0].artistCover ? currentArtist[0].artistCover : songData[trackIndex].image) : songData[trackIndex].image}/>
               <HomeInfo>
                 <h2>
                   <svg xmlns="http://www.w3.org/2000/svg" width="28.673" height="33.789" viewBox="0 0 28.673 33.789">

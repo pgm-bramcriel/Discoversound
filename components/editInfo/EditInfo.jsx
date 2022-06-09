@@ -1,6 +1,7 @@
 import { collection, doc, getDocs, setDoc } from 'firebase/firestore';
+import { getDownloadURL, ref, uploadBytesResumable } from 'firebase/storage';
 import React, {useEffect, useState} from 'react'
-import { db } from '../../config/firebase';
+import { db, storage } from '../../config/firebase';
 import MainButton from '../mainButton/MainButton';
 import SubTitle from '../subTitle/SubTitle';
 import { FormStyle } from './style';
@@ -10,6 +11,9 @@ const EditInfo = ({user}) => {
   const [currentArtist, setCurrentArtist] = useState();
   const [artistName, setArtistName] = useState();
   const [description, setDescription] = useState();
+  const [artistImage, setArtistImage] = useState();
+  const [fileProgress, setFileProgress] = useState(0);
+  const [artistImageUrl, setArtistImageUrl] = useState();
 
   useEffect(() => {
     getDocs(artistColRef)
@@ -27,12 +31,42 @@ const EditInfo = ({user}) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const artistRef = doc(db, 'artists', currentArtist[0].id);
-    setDoc(artistRef, {
-      artistName: artistName ? artistName : currentArtist[0].artistName,
-      userId: user.uuid,
-      description: description ? description : 'This artist has no description yet...'
-    })
+
+    if (artistImage) {
+      handleFileUpload();
+    }
+  }
+
+  const handleFileUpload = () => {
+    const storageRef = ref(storage, `/artistCovers/${artistImage.name}`);
+    const uploadTask = uploadBytesResumable(storageRef, artistImage);
+
+    uploadTask.on('state_changed', (snapshot) => {
+      const progress = Math.round((snapshot.bytesTransferred / snapshot.totalBytes) * 100);
+      setFileProgress(progress);
+    }, (err) => console.log(err),
+    () => {
+      getDownloadURL(uploadTask.snapshot.ref)
+      .then(url => setArtistImageUrl(url))
+    }
+    )
+  }
+
+  useEffect(() => {
+    if (artistImageUrl) {
+      const artistRef = doc(db, 'artists', currentArtist[0].id);
+      setDoc(artistRef, {
+        artistName: artistName ? artistName : currentArtist[0].artistName,
+        userId: user.uuid,
+        artistCover: artistImageUrl ? artistImageUrl : null,
+        description: description ? description : 'This artist has no description yet...'
+      })
+    } 
+  }, [artistImageUrl])
+
+  const handleFile = (e) => {
+    e.preventDefault();
+    setArtistImage(e.target.files[0]);
   }
 
   return (
@@ -51,7 +85,14 @@ const EditInfo = ({user}) => {
           type='text'
           placeholder='New description...'
         />
+        <label>Artist image</label>
+        <input
+          onChange={handleFile}
+          type='file'
+          placeholder='Artist image...'
+        />
         <MainButton>Update profile</MainButton>
+        <span>File : ${fileProgress} %</span>
       </FormStyle>
     </div>
   )

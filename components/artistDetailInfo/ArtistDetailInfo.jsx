@@ -4,12 +4,11 @@ import { ArtistDetailContainer, ArtistDetailLeft, ArtistDetailRight, Filter, Inf
 import Link from 'next/link';
 
 const ArtistDetailInfo = ({songData, artistData}) => {
-  console.log(artistData);
   return (
     <ArtistDetailContainer>
       <ArtistDetailLeft>
-        <Image 
-          src={songData[0].image}
+        <Image
+          src={artistData.length > 0 ? (artistData[0].artistCover ? artistData[0].artistCover : songData[0].image) : songData[0].image}
           alt='band cover'
           objectFit={'cover'}
           layout={'fill'}

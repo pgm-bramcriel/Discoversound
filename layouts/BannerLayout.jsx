@@ -11,7 +11,7 @@ const BannerLayout = ({children, title, coverImage}) => {
   return (
     <GlobalStyling>
       <BannerHeader style={{
-        backgroundImage: coverImage ? `linear-gradient(rgba(28,28,28,0.6), rgba(28,28,28,0.6)), url(/images/${coverImage})` : `linear-gradient(rgba(28,28,28,0.6), rgba(28,28,28,0.6)), url(${image})`,
+        backgroundImage: coverImage ? `linear-gradient(rgba(28,28,28,0.6), rgba(28,28,28,0.6)), url(${coverImage})` : `linear-gradient(rgba(28,28,28,0.6), rgba(28,28,28,0.6)), url(${image})`,
         backgroundPosition: 'center',
         objectFit: 'cover',
         backgroundRepeat: 'no-repeat',
