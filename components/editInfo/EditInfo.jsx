@@ -2,6 +2,7 @@ import { collection, doc, getDocs, setDoc } from 'firebase/firestore';
 import { getDownloadURL, ref, uploadBytesResumable } from 'firebase/storage';
 import React, {useEffect, useState} from 'react'
 import { db, storage } from '../../config/firebase';
+import { Progress } from '../../pages/styles/create';
 import MainButton from '../mainButton/MainButton';
 import SubTitle from '../subTitle/SubTitle';
 import { FormStyle } from './style';
@@ -105,7 +106,14 @@ const EditInfo = ({user}) => {
           placeholder='Artist image...'
         />
         <MainButton>Update profile</MainButton>
-        <span>File : ${fileProgress} %</span>
+        {
+          fileProgress > 0 &&
+          <Progress value={fileProgress} max={100}/>
+        }
+        {
+          fileProgress === 100 &&
+          <p>File uploaded!</p>
+        }
       </FormStyle>
     </div>
   )

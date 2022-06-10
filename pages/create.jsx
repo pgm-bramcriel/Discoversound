@@ -3,7 +3,7 @@ import BaseTitle from '../components/baseTitle/BaseTitle'
 import MainButton from '../components/mainButton/MainButton'
 import BaseLayout from '../layouts/BaseLayout'
 import Image from 'next/image';
-import { CreateContainer, CreateContent } from './styles/create'
+import { CreateContainer, CreateContent, Progress } from './styles/create'
 import { useAuth } from '../context/AuthContext';
 import { getDownloadURL, ref, uploadBytesResumable } from 'firebase/storage';
 import { db, storage } from '../config/firebase';
@@ -112,8 +112,22 @@ const Create = () => {
                   placeholder='examplefile.mp3'
                 />
                 <MainButton>Upload!</MainButton>
-                <span>File : ${fileProgress} %</span>
-                <span>Image : ${imageProgress} %</span>
+                {
+                  fileProgress > 0 &&
+                  <Progress value={fileProgress} max={100}/>
+                }
+                {
+                  fileProgress === 100 &&
+                  <p>File uploaded!</p>
+                }
+                {
+                  imageProgress > 0 &&
+                  <Progress value={imageProgress} max={100}/>
+                }
+                {
+                  imageProgress === 100 &&
+                  <p>Image uploaded!</p>
+                }
               </form>
               <section>
                 <Image
