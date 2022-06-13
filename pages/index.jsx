@@ -210,7 +210,9 @@ const Home = () => {
                 {currentArtist.length === 0 &&
                   <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut pharetra lectus et suscipit convallis. Pellentesque fringilla quam id urna bibendum aliquam. Fusce finibus.</p>
                 }
-                <MainButton>More by {songData[trackIndex].artistName}</MainButton>
+                <Link passhref href={`artist/${songData[trackIndex].userId}`}>
+                  <MainButton>More by {songData[trackIndex].artistName}</MainButton>
+                </Link>
               </HomeInfo>
             </ArtistInfo>
             <div>
