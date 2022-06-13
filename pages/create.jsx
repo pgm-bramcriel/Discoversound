@@ -99,17 +99,19 @@ const Create = () => {
                   type='text'
                   placeholder='songname'
                 />
-                <label>Song file</label>
+                <label>Song file (.mp3)</label>
                 <input
                   onChange={handleFile}
                   type='file'
                   placeholder='examplefile.mp3'
+                  accept='.mp3'
                 />
                 <label>Song cover</label>
                 <input
                   onChange={handleSongCover}
                   type='file'
                   placeholder='examplefile.mp3'
+                  accept='.png, .jpg, .jpeg'
                 />
                 <MainButton>Upload!</MainButton>
                 {
