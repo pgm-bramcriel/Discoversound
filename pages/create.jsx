@@ -3,7 +3,7 @@ import BaseTitle from '../components/baseTitle/BaseTitle'
 import MainButton from '../components/mainButton/MainButton'
 import BaseLayout from '../layouts/BaseLayout'
 import Image from 'next/image';
-import { CreateContainer, CreateContent, Progress } from './styles/create'
+import { CreateContainer, CreateContent, Progress } from '../pageStyles/create'
 import { useAuth } from '../context/AuthContext';
 import { getDownloadURL, ref, uploadBytesResumable } from 'firebase/storage';
 import { db, storage } from '../config/firebase';

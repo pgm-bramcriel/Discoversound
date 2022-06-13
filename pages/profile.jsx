@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react'
 import BannerLayout from '../layouts/BannerLayout'
-import { ProfileNav } from './styles/profile'
+import { ProfileNav } from '../pageStyles/profile'
 import TopSongs from '../components/topSongs/TopSongs'
 import AllSongs from '../components/allSongs/AllSongs'
 import { useAuth } from '../context/AuthContext'

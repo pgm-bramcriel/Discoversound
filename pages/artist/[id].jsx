@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react'
-import { ArtistNav } from '../styles/artist';
+import { ArtistNav } from '../../pageStyles/artist';
 import MusicCard from '../../components/musicCard/MusicCard';
 import ReactPlayer from 'react-player';
 import { SongContext } from '../../context/SongContext';

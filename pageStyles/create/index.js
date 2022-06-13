@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { color, media, radius } from '../../../styles/variables';
+import { color, media, radius } from '../../styles/variables';
 
 const CreateContainer = styled.div`
   h2 {

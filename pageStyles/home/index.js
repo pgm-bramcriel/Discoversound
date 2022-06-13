@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { color, fontSize, media, transition } from '../../../styles/variables';
+import { color, fontSize, media, transition } from '../../styles/variables';
 
 const Heading = styled.div`
   position: relative;

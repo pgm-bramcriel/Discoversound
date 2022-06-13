@@ -2,7 +2,7 @@ import { collection, doc, getDocs, setDoc } from 'firebase/firestore';
 import { getDownloadURL, ref, uploadBytesResumable } from 'firebase/storage';
 import React, {useEffect, useState} from 'react'
 import { db, storage } from '../../config/firebase';
-import { Progress } from '../../pages/styles/create';
+import { Progress } from '../../pageStyles/create';
 import MainButton from '../mainButton/MainButton';
 import SubTitle from '../subTitle/SubTitle';
 import { FormStyle } from './style';

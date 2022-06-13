@@ -4,7 +4,7 @@ import Cd from '../components/cd/Cd';
 import BaseLayout from '../layouts/BaseLayout';
 import Player from '../components/player/Player';
 import ArtistCover from '../components/artistCover/ArtistCover';
-import { ArtistInfo, Heading, HomeInfo, HomeInfoMobile } from './styles/home';
+import { ArtistInfo, Heading, HomeInfo, HomeInfoMobile } from '../pageStyles/home';
 import MainButton from '../components/mainButton/MainButton';
 import { PlayedContext } from '../context/PlayedContext';
 import { addDoc, collection, deleteDoc, doc, getDocs } from 'firebase/firestore';

@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { color, fontSize, transition } from '../../../styles/variables'
+import { color, fontSize, transition } from '../../styles/variables'
 
 const ProfileNav = styled.div`
   display: flex;
