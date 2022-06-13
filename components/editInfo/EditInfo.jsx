@@ -104,6 +104,7 @@ const EditInfo = ({user}) => {
           onChange={handleFile}
           type='file'
           placeholder='Artist image...'
+          accept='.png, .jpg, .jpeg'
         />
         <MainButton>Update profile</MainButton>
         {
