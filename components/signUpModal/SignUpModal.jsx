@@ -3,7 +3,6 @@ import { BottomSection, CloseButton, SignUpModalStyle, TopSection } from './styl
 import {ModalContext} from '../../context/ModalContext'
 import Login from '../login/Login';
 import Register from '../register/Register';
-import { useAuth } from '../../context/AuthContext';
 
 const SignUpModal = () => {
   const [loginToggle, setLoginToggle] = useState(true);

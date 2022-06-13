@@ -10,7 +10,7 @@ import { db, storage } from '../config/firebase';
 import { addDoc, collection } from 'firebase/firestore';
 
 const Create = () => {
-  const image = require("../public/images/undraw_Compose_music_re_wpiw.svg");
+  const image = require("../public/images/create-image.png");
   const {user} = useAuth();
   const [file, setFile] = useState();
   const [songName, setSongName] = useState('');
