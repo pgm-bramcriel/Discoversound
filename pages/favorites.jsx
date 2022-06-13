@@ -81,7 +81,7 @@ const Favorites = () => {
                 onProgress={handleProgress}
                 onDuration={handleDuration}
                 playing
-                volume={0}
+                volume={0.1}
                 url={song}
                 height={0}
                 width={0}/>
