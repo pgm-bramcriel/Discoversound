@@ -1,21 +1,63 @@
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
 import { ArtistNav } from '../styles/artist';
 import MusicCard from '../../components/musicCard/MusicCard';
 import ReactPlayer from 'react-player';
-import { useAuth } from '../../context/AuthContext';
 import { SongContext } from '../../context/SongContext';
 import Player from '../../components/player/Player';
 import BannerLayout from '../../layouts/BannerLayout';
+import { db } from '../../config/firebase';
+import { collection, getDocs } from 'firebase/firestore';
+import {useRouter} from 'next/router';
+import ArtistDetailInfo from '../../components/artistDetailInfo/ArtistDetailInfo';
 
 const Artist = () => {
   const [trackDuration, setTrackDuration] = useState(0);
   const [trackProgress, setTrackProgress] = useState(0);
+  const [songData, setSongData] = useState('');
+  const [artistData, setArtistData] = useState('');
   const [song, setSong] = useState('');
-  const [songTab, setSongTab] = useState(true);
-  const [infoTab, setInfoTab] = useState(false);
+  const [songTab, setSongTab] = useState(false);
+  const [infoTab, setInfoTab] = useState(true);
 
-  const cover1 = require("../../public/images/rose-mixtape-album-cover-art-template-design-59c928b377e5f0e8e9aabc4982ca7e14_screen.jpg");
-  const cover2 = require("../../public/images/fairy-tale-cd-cover-art-template-design-7d7816925d2958dd4a4e968954ceadf5_screen.jpg");
+  const router = useRouter();
+
+  const {id} = router.query;
+
+  const songColRef = collection(db, 'songs');
+  const artistColRef = collection(db, 'artists');
+
+  const getSongs = async () => {
+    getDocs(songColRef)
+    .then((snapshot) => {
+      let data = [];
+      snapshot.docs.forEach((doc) => {
+        data.push({...doc.data(), id: doc.id})
+      })
+      data = data.filter((song) => {
+        return song.userId === `${id}`;
+      });
+      setSongData(data);
+    })
+  }
+
+  const getArtists = async () => {
+    getDocs(artistColRef)
+    .then((snapshot) => {
+      let data = [];
+      snapshot.docs.forEach((doc) => {
+        data.push({...doc.data(), id: doc.id})
+      })
+      data = data.filter((artist) => {
+        return artist.userId === `${id}`;
+      });
+      setArtistData(data);
+    })
+  }
+
+  useEffect(() => {
+    getSongs();
+    getArtists();
+  }, [])
 
   const handleProgress = (progress) => {
     setTrackProgress(progress.playedSeconds);
@@ -37,32 +79,12 @@ const Artist = () => {
     setInfoTab(true);
   }
 
-  const tracks = [
-    {
-      artist: 'Rose Mixtape',
-      title: 'Late Night Drive',
-      src: 'https://audioplayer.madza.dev/Madza-Late_Night_Drive.mp3',
-      artistCover: cover1
-    },
-    {
-      artist: 'Fairy Tale',
-      title: 'Chords of Life',
-      src: 'https://audioplayer.madza.dev/Madza-Chords_of_Life.mp3',
-      artistCover: cover2
-    }
-  ]
+  console.log(artistData);
 
   return (
     <SongContext.Provider value={{song, setSong}}>
-      <BannerLayout>
+      <BannerLayout title={artistData.length > 0 ? artistData[0].artistName : 'Loading...'} coverImage={artistData.length > 0 ? artistData[0].artistCover : null}>
         <ArtistNav>
-          <li>
-            <button
-            style={{color: songTab ? '#F57261' : '#f9f9f9'}}
-            onClick={toggleSongTab}>
-              Songs
-            </button>
-          </li>
           <li>
             <button
             style={{color: infoTab ? '#F57261' : '#f9f9f9'}}
@@ -70,16 +92,39 @@ const Artist = () => {
               Info
             </button>
           </li>
+          <li>
+            <button
+            style={{color: songTab ? '#F57261' : '#f9f9f9'}}
+            onClick={toggleSongTab}>
+              Songs
+            </button>
+          </li>
         </ArtistNav>
         {
           songTab &&
           <div>
-            {tracks.map((track, index) => {
-              return (
-                <MusicCard key={index} source={track.src} index={index + 1} songName={track.title} artistName={track.artist} image={track.artistCover}/>
-              )
-            })}
+            {songData &&
+              <>
+                {songData.map((song, index) => {
+                  return (
+                    <MusicCard key={index} source={song.filePath} index={index + 1} songName={song.name} artistName={song.artistName} image={song.image}/>
+                  )
+                })}
+              </>
+            }
           </div>
+        }
+        {
+          infoTab &&
+          <>
+            {songData &&
+              <>
+                {artistData &&
+                  <ArtistDetailInfo songData={songData} artistData={artistData}/>
+                }
+              </>
+            }
+          </>
         }
       <ReactPlayer
         onProgress={handleProgress}

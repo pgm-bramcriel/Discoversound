@@ -6,12 +6,12 @@ const ArtistCover = ({image}) => {
   return (
     <ArtistCoverStyled>
       <ImageFilter />
-        <Image
-          alt='cover'
-          src={image}
-          objectFit='cover'
-          layout='fill'
-        />
+      <Image
+        alt='cover'
+        src={image}
+        objectFit='cover'
+        layout='fill'
+      />
     </ArtistCoverStyled>
   )
 }

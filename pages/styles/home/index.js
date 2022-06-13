@@ -46,6 +46,13 @@ const HomeInfo = styled.div`
     display: flex;
     align-items: center;
 
+    span {
+      max-width: 20rem;
+      text-overflow: ellipsis;
+      overflow: hidden;
+      white-space: nowrap;
+    }
+
     @media (min-width: ${media.large}) {
       font-size: ${fontSize.l};
     }
@@ -74,6 +81,10 @@ const HomeInfo = styled.div`
         path {
           transition: ${transition.medium};
           fill: ${color.black};
+        }
+
+        .favorite {
+          fill: ${color.accent};
         }
 
         &:hover {
@@ -138,7 +149,10 @@ const HomeInfoMobile = styled.div`
 
         path {
           transition: ${transition.medium};
-          fill: ${color.black};
+        }
+
+        .favorite {
+          fill: ${color.accent};
         }
 
         &:hover {

@@ -1,15 +1,52 @@
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
 import BannerLayout from '../layouts/BannerLayout'
 import { ProfileNav } from './styles/profile'
 import TopSongs from '../components/topSongs/TopSongs'
 import AllSongs from '../components/allSongs/AllSongs'
+import { useAuth } from '../context/AuthContext'
+import { db } from '../config/firebase'
+import { collection, getDocs } from 'firebase/firestore'
+import EditInfo from '../components/editInfo/EditInfo'
 
 const Profile = () => {
   const [songTab, setSongTab] = useState(true);
   const [infoTab, setInfoTab] = useState(false);
+  const [songData, setSongData] = useState();
+  const [artist, setArtist] = useState([]);
+  const {user} = useAuth();
 
-  const cover1 = require("../public/images/rose-mixtape-album-cover-art-template-design-59c928b377e5f0e8e9aabc4982ca7e14_screen.jpg");
-  const cover2 = require("../public/images/fairy-tale-cd-cover-art-template-design-7d7816925d2958dd4a4e968954ceadf5_screen.jpg");
+  const colRef = collection(db, 'songs');
+  const artistColRef = collection(db, 'artists');
+
+  const getSongs = async () => {
+    getDocs(colRef)
+    .then((snapshot) => {
+      let data = [];
+      snapshot.docs.forEach((doc) => {
+        data.push({...doc.data(), id: doc.id})
+      })
+      data = data.filter((song) => {
+        return song.userId === user.uuid;
+      })
+      setSongData(data);
+    })
+  }
+
+  useEffect(() => {
+    getSongs();
+
+    getDocs(artistColRef)
+    .then((snapshot) => {
+      let data = [];
+      snapshot.docs.forEach((doc) => {
+        data.push({...doc.data(), id: doc.id})
+      })
+      data = data.filter((artist) => {
+        return artist.userId === user.uuid;
+      });
+      setArtist(data);
+    })
+  }, []);
 
   const toggleSongTab = (e) => {
     e.preventDefault();
@@ -23,23 +60,8 @@ const Profile = () => {
     setInfoTab(true);
   }
 
-  const tracks = [
-    {
-      artist: 'Rose Mixtape',
-      title: 'Late Night Drive',
-      src: 'https://audioplayer.madza.dev/Madza-Late_Night_Drive.mp3',
-      artistCover: cover1
-    },
-    {
-      artist: 'Fairy Tale',
-      title: 'Chords of Life',
-      src: 'https://audioplayer.madza.dev/Madza-Chords_of_Life.mp3',
-      artistCover: cover2
-    }
-  ]
-
   return (
-    <BannerLayout>
+    <BannerLayout coverImage={artist.length > 0 ? (artist[0].artistCover ? artist[0].artistCover : undefined) : undefined}>
       <ProfileNav>
         <li>
           <button
@@ -58,8 +80,19 @@ const Profile = () => {
       </ProfileNav>
       {songTab &&
         <>
-          <TopSongs />
-          <AllSongs data={tracks}/>
+          {songData &&
+            <>
+              <TopSongs data={songData}/>
+              <AllSongs data={songData}/>
+            </>
+          }
+        </>
+      }
+      {infoTab &&
+        <>
+          {user &&
+            <EditInfo user={user}/>
+          }
         </>
       }
     </BannerLayout>

@@ -13,6 +13,10 @@ const NavStyle = styled.nav`
 const NavItemsStyle = styled.ul`
     text-transform: capitalize;
     display: flex;
+
+    .active {
+        color: ${color.accent};
+    }
 `
 
 const NavItemStyle = styled.li`

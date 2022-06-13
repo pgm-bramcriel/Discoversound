@@ -20,6 +20,7 @@ const CreateContainer = styled.div`
 
   button {
     width: 100%;
+    margin-bottom: 1rem;
   }
 `
 
@@ -50,7 +51,27 @@ const CreateContent = styled.div`
   }
 `
 
+const Progress = styled.progress`
+  width: 100%;
+  height: 1rem;
+  -webkit-appearance: none;
+  appearance: none;
+  z-index: 2;
+  margin-top: 0.5rem;
+
+  &::-webkit-progress-bar {
+    background-color: ${color.white};
+    border-radius: ${radius.small};
+  }
+
+  &::-webkit-progress-value {
+    background-color: ${color.accent};
+    border-radius: ${radius.small};
+  }
+`
+
 export {
   CreateContainer,
-  CreateContent
+  CreateContent,
+  Progress
 }

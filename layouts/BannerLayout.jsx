@@ -4,14 +4,14 @@ import SignUpModal from '../components/signUpModal/SignUpModal'
 import { BannerHeader, BannerMain, GlobalStyling } from './style'
 import {ModalContext} from '../context/ModalContext'
 
-const BannerLayout = ({children}) => {
+const BannerLayout = ({children, title, coverImage}) => {
   const {modalValue} = useContext(ModalContext);
   const image = '/images/SamSpratt_KidCudi_ManOnTheMoon3_AlbumCover_Web.jpg';
 
   return (
     <GlobalStyling>
       <BannerHeader style={{
-        background: `linear-gradient(rgba(28,28,28,0.6), rgba(28,28,28,0.6)), url(${image})`,
+        backgroundImage: coverImage ? `linear-gradient(rgba(28,28,28,0.6), rgba(28,28,28,0.6)), url(${coverImage})` : `linear-gradient(rgba(28,28,28,0.6), rgba(28,28,28,0.6)), url(${image})`,
         backgroundPosition: 'center',
         objectFit: 'cover',
         backgroundRepeat: 'no-repeat',
@@ -19,7 +19,7 @@ const BannerLayout = ({children}) => {
         backgroundSize: '100%'
       }}>
         <Nav />
-        <h2>Artistname</h2>
+        <h2>{title}</h2>
       </BannerHeader>
       <BannerMain>
         {children}
